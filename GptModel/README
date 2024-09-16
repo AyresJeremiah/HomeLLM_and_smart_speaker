@@ -1,2 +1,5 @@
+Make sure you give docker at least 24Gb of ram to run this.
+
+
 docker build -t gpt-llm-server .
 docker run -p 8000:8000 gpt-llm-server
