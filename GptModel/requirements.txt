@@ -1,2 +1,3 @@
-Flask==2.3.3
-SpeechRecognition==3.8.1
+transformers
+torch
+flask

@@ -3,9 +3,6 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Install necessary dependencies, including flac
-RUN apt-get update && apt-get install -y flac
-
 # Set the working directory in the container
 WORKDIR /app
 
@@ -13,13 +10,13 @@ WORKDIR /app
 COPY . /app
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir transformers torch flask
 
-# Expose port 5000
-EXPOSE 5000
+# Expose port 8000 (or any port your model server uses)
+EXPOSE 8000
 
-# Define environment variable
-ENV FLASK_APP=app.py
+# Copy the model serving script
+COPY serve_model.py /app/
 
-# Start the Flask app
-CMD ["flask", "run", "--host=0.0.0.0"]
+# Start the model server
+CMD ["python", "serve_model.py"]
